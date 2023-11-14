@@ -15,7 +15,9 @@ import v1_3_2 from "./patchnote/v1_3_2";
 import v1_3_3 from "./patchnote/v1_3_3";
 import v1_3_4 from "./patchnote/v1_3_4";
 import v1_3_5 from "./patchnote/v1_3_5";
+import v1_4_0 from "./patchnote/v1_4_0";
 import v1_3_6 from "./patchnote/v1_3_6";
+import v1_4_1 from "./patchnote/v1_4_1";
 
 export default {
     name: 'meta',
@@ -51,6 +53,8 @@ export default {
             store.commit('system/initTheme', {name: key, ...elem});
         }
         for (const [key, elem] of Object.entries({
+            '1.4.1': v1_4_1,
+            '1.4.0': v1_4_0,
             '1.3.6': v1_3_6,
             '1.3.5': v1_3_5,
             '1.3.4': v1_3_4,
