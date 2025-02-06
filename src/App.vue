@@ -415,6 +415,16 @@
               <span>{{ $vuetify.lang.t('$vuetify.gooboo.saveManual') + (autosaveTimer !== null ? (' (' + $formatTime(autosaveTimer) + ')') : '') }}</span>
             </v-list-item-title>
           </v-list-item>
+          <v-list-item @click="handleSaveData">
+            <v-list-item-title>
+              <span>保存到云端</span>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="handleLoadData">
+            <v-list-item-title>
+              <span>从云端加载</span>
+            </v-list-item-title>
+          </v-list-item>
           <v-list-item @click="exportSave">
             <v-badge :value="backupHint" color="red" dot>
               <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.saveExport') }}</v-list-item-title>
@@ -513,7 +523,7 @@ import General from './components/view/General.vue';
 import Event from './components/view/Event.vue';
 import Treasure from './components/view/Treasure.vue';
 import Cryolab from './components/view/Cryolab.vue';
-import { cleanStore, decodeFile, exportFile, saveLocal } from './js/savefile';
+import { cleanStore, decodeFile, exportFile, saveLocal, saveFileData, getFileData } from './js/savefile';
 import NextTile from './components/partial/main/NextTile.vue';
 import VSnackbars from 'v-snackbars'
 import AchievementMessage from './components/partial/snackbar/AchievementMessage.vue';
@@ -692,6 +702,12 @@ export default {
     localSave() {
       saveLocal();
       this.$store.commit('system/resetAutosaveTimer');
+    },
+    handleLoadData(){
+      getFileData()
+    },
+    handleSaveData(){
+      saveFileData()
     },
     exportSave() {
       this.$store.commit('system/updateKey', {key: 'backupTimer', value: 0});
