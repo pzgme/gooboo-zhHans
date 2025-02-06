@@ -24,6 +24,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@fontsource/roboto-mono": "^5.0.3",
     "@mdi/font": "^7.3.67",
+    "axios": "^1.7.9",
     "color": "^4.2.3",
     "core-js": "^3.33.0",
     "electron-squirrel-startup": "^1.0.0",

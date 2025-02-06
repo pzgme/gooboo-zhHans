@@ -14,6 +14,7 @@ import treasure from "./modules/treasure";
 import general from "./modules/general";
 import event from "./modules/event";
 import cryolab from "./modules/cryolab";
+import { saveData, getData } from "./api/goobooSavefile"
 import v1_1_0 from "./modules/migration/v1_1_0";
 import { getDay } from "./utils/date";
 import v1_1_2 from "./modules/migration/v1_1_2";
@@ -29,6 +30,7 @@ import v1_5_1 from "./modules/migration/v1_5_1";
 import v1_5_3 from "./modules/migration/v1_5_3";
 import v1_5_4 from "./modules/migration/v1_5_4";
 import v1_5_6 from "./modules/migration/v1_5_6";
+import {loadGame} from "@/js/init";
 
 const migrations = {
     '1.1.0': v1_1_0,
@@ -45,7 +47,7 @@ const migrations = {
     '1.5.6': v1_5_6,
 };
 
-export { checkLocal, saveLocal, loadFile, exportFile, cleanStore, getSavefile, getSavefileName, encodeFile, decodeFile }
+export { checkLocal, saveLocal, loadFile, exportFile, cleanStore, getSavefile, getSavefileName, encodeFile, decodeFile, saveFileData, getFileData };
 const semverCompare = require('semver/functions/compare');
 
 /**
@@ -59,6 +61,51 @@ function checkLocal() {
 
 function saveLocal() {
     localStorage.setItem(LOCAL_STORAGE_NAME, getSavefile());
+}
+
+//保存数据到云端
+const saveFileData = async () => {
+    try {
+        const goobooSavefile = localStorage.getItem('goobooSavefile')
+        if (!goobooSavefile) return
+
+        const res = await saveData({
+            saveData: goobooSavefile,
+        })
+
+        if (res.code === 0) {
+            store.commit('system/addNotification', {color: 'info', timeout: 2000, message: {
+                    type: 'save',
+                    name: 'auto'
+                }});
+        }
+    } catch (error) {
+        store.commit('system/addNotification', {color: 'error', timeout: 5000, message: {
+                type: 'save',
+                name: 'auto',
+                error: error
+            }});
+    }
+}
+
+//从云端获取数据
+const getFileData = async () => {
+    try {
+        const res = await getData()
+
+        if (res.code === 0 && res.data.saveData) {
+            cleanStore();
+            loadGame(res.data.saveData)
+            console.log('数据读取成功')
+
+        }
+    } catch (error) {
+        store.commit('system/addNotification', {color: 'error', timeout: 5000, message: {
+                type: 'save',
+                name: 'auto',
+                error: error
+            }});
+    }
 }
 
 function cleanStore() {
