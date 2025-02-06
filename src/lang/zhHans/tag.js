@@ -1,0 +1,15 @@
+export default {
+  hordeEnergyToStr: '每点当前能量提供 +{0} 力量',
+  hordeEnergyToEnergyReg: '每点缺失能量提供 +{0} 能量恢复速度',
+  hordeEnergyOnCrit: '暴击时获得 +{0} 能量',
+  hordeHealOnCrit: '暴击时恢复 {0} 最大生命值',
+  hordeRestoreCooldownOnCrit: '暴击时冷却时间减少 {0}',
+  hordeBloodOnCrit: '暴击时获得 {0} 敌人的血液',
+  hordeManaRest: '在 {0} 内未使用主动技能后，获得 {1} 魔法恢复速度',
+  hordeManasteal: '击杀时获得 {0} 魔法值',
+  hordePassiveRecovery: '每秒恢复 {0} 的生命值',
+  hordeActiveDamageCrit: '伤害型主动技能暴击效率为 {0}',
+  hordeActiveHealCrit: '治疗型主动技能暴击效率为 {0}',
+  hordeAttackAfterTime: '在同一场战斗中，每分钟获得 +{0} 攻击力',
+  hordeStrIntAfterTime: '在同一场战斗中，每分钟获得 {0} 力量和智力',
+};
