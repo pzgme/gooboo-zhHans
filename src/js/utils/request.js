@@ -44,6 +44,7 @@ instance.interceptors.response.use(
 
         const res = response.data
         if (res.code !== 0) {
+            return Promise.reject(new Error(res.message || '请求失败'))
         }
         return res
     },
