@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const instance = axios.create({
-    baseURL: "https://api.ggpop.com/", // API的地址
+    baseURL: "https://api.ggpop.com/api/v1", // API的地址
     timeout: 99999
 })
 const TOKEN_KEY = 'token'
